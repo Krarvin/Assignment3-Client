@@ -2,6 +2,7 @@ package nz.ac.vuw.swen301.assignment3;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.utils.URIBuilder;
 import org.apache.http.entity.StringEntity;
@@ -43,6 +44,14 @@ public class Resthome4LogsAppender extends AppenderSkeleton {
             HttpClient httpClient = HttpClientBuilder.create().build();
             HttpResponse response = httpClient.execute(post);
             System.out.println(response.getStatusLine());
+
+            URIBuilder builder2 = new URIBuilder();
+            builder2.setScheme("http").setHost("localhost").setPort(8080).setPath("/resthome4logs/stats");
+            URI getUri = builder2.build();
+            HttpGet get = new HttpGet(getUri);
+            HttpClient httpClient2 = HttpClientBuilder.create().build();
+            HttpResponse response1 = httpClient2.execute(get);
+            System.out.println(response1.getStatusLine());
         }catch(Exception e){
             e.printStackTrace();
         }
