@@ -1,5 +1,13 @@
 package nz.ac.vuw.swen301.assignment3;
 
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.utils.URIBuilder;
+import org.apache.http.impl.client.HttpClientBuilder;
+import org.apache.http.util.EntityUtils;
+import org.json.JSONArray;
+
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.*;
@@ -8,6 +16,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.URI;
 
 public class LogMonitor extends JFrame {
     public LogMonitor() {
@@ -49,28 +60,59 @@ public class LogMonitor extends JFrame {
         c.gridy = 0;
         jpanel.add(limitfield, c);
         final JButton fetchButton = new JButton("FETCH DATA");
-//        fetchButton.addActionListener(new ActionListener() {
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-//                System.out.println("entered");
-//                int numlogs = Integer.parseInt(limitfield.getText());
-//                System.out.println(numlogs);
-//                String[][] data = new String[50][5];
-//                for(int i =0; i < numlogs; i++){
-//                    data[i] = new String[]{"2019-07-29T09:12:33.001Z", "WARN", "example", "main", "...","asdf"};
-//                }
-//                String[] columnNames = {"time", "level", "logger", "thread", "message"};
-//                JTable table = new JTable(data,columnNames);
-//                table.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
-//                table.setBounds(30,40,200,200);
-//                JScrollPane scroll = new JScrollPane(table);
-//                scroll.setPreferredSize(new Dimension(300,100));
-//                c.gridwidth = 8;
-//                c.gridy = 1;
-//                c.gridx = 0;
-//                jpanel.add(scroll,c);
-//            }
-//        });
+        fetchButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String num = limitfield.getText();
+                String level = levelList.getSelectedItem().toString();
+
+                try {
+                    URIBuilder builder = new URIBuilder();
+                    builder.setScheme("http").setHost("localhost").setPort(8080).setPath("/resthome4logs/logs").setParameter("Limit", num).setParameter("Level",level);
+                    URI getUri = builder.build();
+                    HttpGet get = new HttpGet(getUri);
+                    HttpClient httpClient = HttpClientBuilder.create().build();
+                    HttpResponse response = httpClient.execute(get);
+                    String jsonString = EntityUtils.toString(response.getEntity());
+                    System.out.println(jsonString);
+                    JSONArray jsonArray = new JSONArray(jsonString);
+                    int numlogs = Integer.parseInt(num);
+                    System.out.println("entered");
+                    System.out.println(numlogs);
+                    String[][] data = new String[numlogs][5];
+                    for(int i =0; i < numlogs; i++){
+                        for(int j =0; j<5; j++) {
+                            if(j == 0) {
+                                data[i][j] = jsonArray.getJSONObject(i).getString("timestamp");
+                            }else if(j == 1){
+                                data[i][j] = jsonArray.getJSONObject(i).getString("level");
+                            }else if(j == 2){
+                                data[i][j] = jsonArray.getJSONObject(i).getString("logger");
+                            }else if(j == 3){
+                                data[i][j] = jsonArray.getJSONObject(i).getString("thread");
+                            }else{
+                                data[i][j] = jsonArray.getJSONObject(i).getString("message");
+                            }
+                        }
+                    }
+                    String[] columnNames = {"time", "level", "logger", "thread", "message"};
+                    JTable table = new JTable(data,columnNames);
+                    table.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
+                    table.setBounds(30,40,200,200);
+                    JScrollPane scroll = new JScrollPane(table);
+                    scroll.setPreferredSize(new Dimension(300,100));
+                    c.gridwidth = 8;
+                    c.gridy = 1;
+                    c.gridx = 0;
+                    jpanel.add(scroll,c);
+                    jpanel.revalidate();
+                    jpanel.repaint();
+                }catch(Exception e1){
+                    e1.printStackTrace();
+                }
+
+            }
+        });
         c.gridx = 4;
         c.gridy = 0;
         jpanel.add(fetchButton, c);
@@ -78,33 +120,33 @@ public class LogMonitor extends JFrame {
         c.gridx = 5;
         c.gridy = 0;
         jpanel.add(downloadButton, c);
-        String[][] data = {
-                {"2019-07-29T09:12:33.001Z", "WARN", "example", "main", "..."},
-                {"2019-07-29T09:12:33.001Z", "WARN", "example", "main", "..."},
-                {"2019-07-29T09:12:33.001Z", "WARN", "example", "main", "..."},
-                {"2019-07-29T09:12:33.001Z", "WARN", "example", "main", "..."},
-                {"2019-07-29T09:12:33.001Z", "WARN", "example", "main", "..."},
-                {"2019-07-29T09:12:33.001Z", "WARN", "example", "main", "..."},
-                {"2019-07-29T09:12:33.001Z", "WARN", "example", "main", "..."},
-                {"2019-07-29T09:12:33.001Z", "WARN", "example", "main", "..."},
-                {"2019-07-29T09:12:33.001Z", "WARN", "example", "main", "..."},
-                {"2019-07-29T09:12:33.001Z", "WARN", "example", "main", "..."},
-                {"2019-07-29T09:12:33.001Z", "WARN", "example", "main", "..."},
-                {"2019-07-29T09:12:33.001Z", "WARN", "example", "main", "..."},
-                {"2019-07-29T09:12:33.001Z", "WARN", "example", "main", "..."},
-                {"2019-07-29T09:12:33.001Z", "WARN", "example", "main", "..."},
-                {"2019-07-29T09:12:33.001Z", "WARN", "example", "main", "..."}
-            };
-        String[] columnNames = {"time", "level", "logger", "thread", "message"};
-        JTable table = new JTable(data,columnNames);
-        table.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
-        JScrollPane scroll = new JScrollPane(table);
-        scroll.setPreferredSize(new Dimension(300,250));
-        c.gridwidth = 8;
-        c.gridheight = 5;
-        c.gridy = 1;
-        c.gridx = 0;
-        jpanel.add(scroll,c);
+//        String[][] data = {
+//                {"2019-07-29T09:12:33.001Z", "WARN", "example", "main", "..."},
+//                {"2019-07-29T09:12:33.001Z", "WARN", "example", "main", "..."},
+//                {"2019-07-29T09:12:33.001Z", "WARN", "example", "main", "..."},
+//                {"2019-07-29T09:12:33.001Z", "WARN", "example", "main", "..."},
+//                {"2019-07-29T09:12:33.001Z", "WARN", "example", "main", "..."},
+//                {"2019-07-29T09:12:33.001Z", "WARN", "example", "main", "..."},
+//                {"2019-07-29T09:12:33.001Z", "WARN", "example", "main", "..."},
+//                {"2019-07-29T09:12:33.001Z", "WARN", "example", "main", "..."},
+//                {"2019-07-29T09:12:33.001Z", "WARN", "example", "main", "..."},
+//                {"2019-07-29T09:12:33.001Z", "WARN", "example", "main", "..."},
+//                {"2019-07-29T09:12:33.001Z", "WARN", "example", "main", "..."},
+//                {"2019-07-29T09:12:33.001Z", "WARN", "example", "main", "..."},
+//                {"2019-07-29T09:12:33.001Z", "WARN", "example", "main", "..."},
+//                {"2019-07-29T09:12:33.001Z", "WARN", "example", "main", "..."},
+//                {"2019-07-29T09:12:33.001Z", "WARN", "example", "main", "..."}
+//            };
+//        String[] columnNames = {"time", "level", "logger", "thread", "message"};
+//        JTable table = new JTable(data,columnNames);
+//        table.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
+//        JScrollPane scroll = new JScrollPane(table);
+//        scroll.setPreferredSize(new Dimension(300,250));
+//        c.gridwidth = 8;
+//        c.gridheight = 5;
+//        c.gridy = 1;
+//        c.gridx = 0;
+//        jpanel.add(scroll,c);
     }
     public static void main(String args[]){
         LogMonitor Gui = new LogMonitor();
