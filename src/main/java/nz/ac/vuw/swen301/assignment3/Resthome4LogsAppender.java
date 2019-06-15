@@ -28,7 +28,8 @@ public class Resthome4LogsAppender extends AppenderSkeleton {
         jsonObject.put("timestamp", new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(loggingEvent.getTimeStamp()));
         jsonObject.put("thread", loggingEvent.getThreadName());
         jsonObject.put("logger", loggingEvent.getLoggerName());
-        jsonObject.put("level", loggingEvent.getLevel());
+        jsonObject.put("level", loggingEvent.getLevel().toString());
+        System.out.println(loggingEvent.getLevel().toString());
         jsonObject.put("errorDetails", "");
         jsonList.add(jsonObject);
         try{
@@ -45,13 +46,6 @@ public class Resthome4LogsAppender extends AppenderSkeleton {
             HttpResponse response = httpClient.execute(post);
             System.out.println(response.getStatusLine());
 
-            URIBuilder builder2 = new URIBuilder();
-            builder2.setScheme("http").setHost("localhost").setPort(8080).setPath("/resthome4logs/stats");
-            URI getUri = builder2.build();
-            HttpGet get = new HttpGet(getUri);
-            HttpClient httpClient2 = HttpClientBuilder.create().build();
-            HttpResponse response1 = httpClient2.execute(get);
-            System.out.println(response1.getStatusLine());
         }catch(Exception e){
             e.printStackTrace();
         }

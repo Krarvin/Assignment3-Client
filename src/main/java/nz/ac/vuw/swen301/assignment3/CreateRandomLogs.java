@@ -18,7 +18,8 @@ public class CreateRandomLogs {
 //                throw new RuntimeException(e);
 //            }
             Random rand = new Random();
-            int level = rand.nextInt(6) + 1;
+            int level = rand.nextInt(5) + 1;
+            System.out.println(level);
             switch(level){
                 case 1:
                     logger.log(Level.FATAL, "fatal message");
