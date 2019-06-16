@@ -90,7 +90,6 @@ public class LogMonitor extends JFrame {
                     HttpGet get = new HttpGet(getUri);
                     HttpClient httpClient = HttpClientBuilder.create().build();
                     HttpResponse response1 = httpClient.execute(get);
-                    System.out.println(response1.getEntity().getContent());
                     XSSFWorkbook workbook = new XSSFWorkbook(response1.getEntity().getContent());
                     FileOutputStream fileOut = new FileOutputStream("log-statistics.xlsx");
                     workbook.write(fileOut);

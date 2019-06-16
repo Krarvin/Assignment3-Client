@@ -32,7 +32,6 @@ public class Resthome4LogsAppender extends AppenderSkeleton {
 //        System.out.println(loggingEvent.getLevel().toString());
         jsonObject.put("errorDetails", "");
         jsonList.add(jsonObject);
-        System.out.println(jsonList.size());
         if(jsonList.size() == 10) {
             try {
                 URIBuilder builder = new URIBuilder();
@@ -54,7 +53,6 @@ public class Resthome4LogsAppender extends AppenderSkeleton {
 
                 HttpClient httpClient = HttpClientBuilder.create().build();
                 HttpResponse response = httpClient.execute(post);
-                System.out.println(response.getStatusLine());
 
             } catch (Exception e) {
                 e.printStackTrace();

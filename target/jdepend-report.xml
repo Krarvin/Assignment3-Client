@@ -1,0 +1,162 @@
+<?xml version="1.0"?>
+<JDepend>
+    <Packages>
+
+        <Package name="java.awt">
+            <error>No stats available: package referenced, but not analyzed.</error>
+        </Package>
+
+        <Package name="java.awt.event">
+            <error>No stats available: package referenced, but not analyzed.</error>
+        </Package>
+
+        <Package name="java.io">
+            <error>No stats available: package referenced, but not analyzed.</error>
+        </Package>
+
+        <Package name="java.lang">
+            <error>No stats available: package referenced, but not analyzed.</error>
+        </Package>
+
+        <Package name="java.net">
+            <error>No stats available: package referenced, but not analyzed.</error>
+        </Package>
+
+        <Package name="java.text">
+            <error>No stats available: package referenced, but not analyzed.</error>
+        </Package>
+
+        <Package name="java.util">
+            <error>No stats available: package referenced, but not analyzed.</error>
+        </Package>
+
+        <Package name="javax.swing">
+            <error>No stats available: package referenced, but not analyzed.</error>
+        </Package>
+
+        <Package name="javax.swing.border">
+            <error>No stats available: package referenced, but not analyzed.</error>
+        </Package>
+
+        <Package name="javax.swing.event">
+            <error>No stats available: package referenced, but not analyzed.</error>
+        </Package>
+
+        <Package name="javax.swing.table">
+            <error>No stats available: package referenced, but not analyzed.</error>
+        </Package>
+
+        <Package name="nz.ac.vuw.swen301.assignment3">
+            <Stats>
+                <TotalClasses>6</TotalClasses>
+                <ConcreteClasses>6</ConcreteClasses>
+                <AbstractClasses>0</AbstractClasses>
+                <Ca>0</Ca>
+                <Ce>22</Ce>
+                <A>0</A>
+                <I>1</I>
+                <D>0</D>
+                <V>1</V>
+            </Stats>
+
+            <AbstractClasses>
+            </AbstractClasses>
+
+            <ConcreteClasses>
+                <Class sourceFile="CreateRandomLogs.java">
+                    nz.ac.vuw.swen301.assignment3.CreateRandomLogs
+                </Class>
+                <Class sourceFile="LogMonitor.java">
+                    nz.ac.vuw.swen301.assignment3.LogMonitor
+                </Class>
+                <Class sourceFile="LogMonitor.java">
+                    nz.ac.vuw.swen301.assignment3.LogMonitor$1
+                </Class>
+                <Class sourceFile="LogMonitor.java">
+                    nz.ac.vuw.swen301.assignment3.LogMonitor$2
+                </Class>
+                <Class sourceFile="LogMonitor.java">
+                    nz.ac.vuw.swen301.assignment3.LogMonitor$3
+                </Class>
+                <Class sourceFile="Resthome4LogsAppender.java">
+                    nz.ac.vuw.swen301.assignment3.Resthome4LogsAppender
+                </Class>
+            </ConcreteClasses>
+
+            <DependsUpon>
+                <Package>java.awt</Package>
+                <Package>java.awt.event</Package>
+                <Package>java.io</Package>
+                <Package>java.lang</Package>
+                <Package>java.net</Package>
+                <Package>java.text</Package>
+                <Package>java.util</Package>
+                <Package>javax.swing</Package>
+                <Package>javax.swing.border</Package>
+                <Package>javax.swing.event</Package>
+                <Package>javax.swing.table</Package>
+                <Package>org.apache.http</Package>
+                <Package>org.apache.http.client</Package>
+                <Package>org.apache.http.client.methods</Package>
+                <Package>org.apache.http.client.utils</Package>
+                <Package>org.apache.http.entity</Package>
+                <Package>org.apache.http.impl.client</Package>
+                <Package>org.apache.http.util</Package>
+                <Package>org.apache.log4j</Package>
+                <Package>org.apache.log4j.spi</Package>
+                <Package>org.apache.poi.xssf.usermodel</Package>
+                <Package>org.json</Package>
+            </DependsUpon>
+
+            <UsedBy>
+            </UsedBy>
+        </Package>
+
+        <Package name="org.apache.http">
+            <error>No stats available: package referenced, but not analyzed.</error>
+        </Package>
+
+        <Package name="org.apache.http.client">
+            <error>No stats available: package referenced, but not analyzed.</error>
+        </Package>
+
+        <Package name="org.apache.http.client.methods">
+            <error>No stats available: package referenced, but not analyzed.</error>
+        </Package>
+
+        <Package name="org.apache.http.client.utils">
+            <error>No stats available: package referenced, but not analyzed.</error>
+        </Package>
+
+        <Package name="org.apache.http.entity">
+            <error>No stats available: package referenced, but not analyzed.</error>
+        </Package>
+
+        <Package name="org.apache.http.impl.client">
+            <error>No stats available: package referenced, but not analyzed.</error>
+        </Package>
+
+        <Package name="org.apache.http.util">
+            <error>No stats available: package referenced, but not analyzed.</error>
+        </Package>
+
+        <Package name="org.apache.log4j">
+            <error>No stats available: package referenced, but not analyzed.</error>
+        </Package>
+
+        <Package name="org.apache.log4j.spi">
+            <error>No stats available: package referenced, but not analyzed.</error>
+        </Package>
+
+        <Package name="org.apache.poi.xssf.usermodel">
+            <error>No stats available: package referenced, but not analyzed.</error>
+        </Package>
+
+        <Package name="org.json">
+            <error>No stats available: package referenced, but not analyzed.</error>
+        </Package>
+    </Packages>
+
+    <Cycles>
+    </Cycles>
+</JDepend>
