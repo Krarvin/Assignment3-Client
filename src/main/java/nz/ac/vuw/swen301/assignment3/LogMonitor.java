@@ -1,6 +1,5 @@
 package nz.ac.vuw.swen301.assignment3;
 
-import com.sun.xml.internal.ws.api.streaming.XMLStreamReaderFactory;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;

@@ -18,7 +18,7 @@ import java.util.ArrayList;
 import java.util.UUID;
 
 public class Resthome4LogsAppender extends AppenderSkeleton {
-    ArrayList<JSONObject> jsonList = new ArrayList<>();
+    public static ArrayList<JSONObject> jsonList = new ArrayList<>();
     @Override
     protected void append(LoggingEvent loggingEvent) {
 
