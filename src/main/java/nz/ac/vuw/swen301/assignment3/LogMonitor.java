@@ -7,6 +7,7 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.utils.URIBuilder;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.util.EntityUtils;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.json.JSONArray;
 
 import javax.swing.*;
@@ -19,6 +20,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.io.BufferedReader;
+import java.io.FileOutputStream;
 import java.io.InputStreamReader;
 import java.net.URI;
 import java.util.EventObject;
@@ -89,7 +91,11 @@ public class LogMonitor extends JFrame {
                     HttpGet get = new HttpGet(getUri);
                     HttpClient httpClient = HttpClientBuilder.create().build();
                     HttpResponse response1 = httpClient.execute(get);
-                    System.out.println(response1.getStatusLine());
+                    System.out.println(response1.getEntity().getContent());
+                    XSSFWorkbook workbook = new XSSFWorkbook(response1.getEntity().getContent());
+                    FileOutputStream fileOut = new FileOutputStream("log-statistics.xlsx");
+                    workbook.write(fileOut);
+                    fileOut.close();
                     JOptionPane.showInternalMessageDialog(jpanel, "Excel stats created");
                 }catch(Exception e2){
                     e2.printStackTrace();
@@ -119,78 +125,77 @@ public class LogMonitor extends JFrame {
 
                 try {
                     URIBuilder builder = new URIBuilder();
-                    builder.setScheme("http").setHost("localhost").setPort(8080).setPath("/resthome4logs/logs").setParameter("Limit", num).setParameter("Level",level);
+                    builder.setScheme("http").setHost("localhost").setPort(8080).setPath("/resthome4logs/logs").setParameter("limit", num).setParameter("level",level);
                     URI getUri = builder.build();
                     HttpGet get = new HttpGet(getUri);
                     HttpClient httpClient = HttpClientBuilder.create().build();
                     HttpResponse response = httpClient.execute(get);
                     String jsonString = EntityUtils.toString(response.getEntity());
-                    JSONArray jsonArray = new JSONArray(jsonString);
                     int numlogs = Integer.parseInt(num);
-                    String[][] data = new String[numlogs][7];
-                    TableModel model = tb.getModel();
-                    for(int i =0; i < numlogs && i<jsonArray.length(); i++){
-                        for(int j =0; j<7; j++) {
-                            if(j == 0) {
+                    if(numlogs <= 50 && numlogs >0) {
+                    JSONArray jsonArray = new JSONArray(jsonString);
+                        String[][] data = new String[numlogs][7];
+                        TableModel model = tb.getModel();
+                        for (int i = 0; i < numlogs && i < jsonArray.length(); i++) {
+                            for (int j = 0; j < 7; j++) {
+                                if (j == 0) {
 //                                data[i][j] = jsonArray.getJSONObject(i).getString("id");
 //                                model.setValueAt(jsonArray.getJSONObject(i).getString("id"),i,j);
-                                model.setValueAt(Integer.toString(i + 1),i,j);
-                            }
-                            if(j == 1) {
+                                    model.setValueAt(Integer.toString(i + 1), i, j);
+                                }
+                                if (j == 1) {
 //                                data[i][j] = jsonArray.getJSONObject(i).getString("id");
-                                model.setValueAt(jsonArray.getJSONObject(i).getString("id"),i,j);
-                            }
-                            else if(j == 2) {
-                                data[i][j] = jsonArray.getJSONObject(i).getString("timestamp");
-                                model.setValueAt(jsonArray.getJSONObject(i).getString("timestamp"),i,j);
-                            }else if(j == 3){
-                                data[i][j] = jsonArray.getJSONObject(i).getString("level");
-                                model.setValueAt(jsonArray.getJSONObject(i).getString("level"),i,j);
-                            }else if(j == 4){
-                                data[i][j] = jsonArray.getJSONObject(i).getString("logger");
-                                model.setValueAt(jsonArray.getJSONObject(i).getString("logger"),i,j);
-                            }else if(j == 5){
-                                data[i][j] = jsonArray.getJSONObject(i).getString("thread");
-                                model.setValueAt(jsonArray.getJSONObject(i).getString("thread"),i,j);
-                            }else if(j == 6){
-                                data[i][j] = jsonArray.getJSONObject(i).getString("message");
-                                model.setValueAt(jsonArray.getJSONObject(i).getString("message"),i,j);
-                            }
-                        }
-                    }
-                    for(int i = numlogs; i<50; i++){
-                        for(int j =0; j<7; j++) {
-                            if(j == 0) {
-                                model.setValueAt("",i,j);
-                            }
-                            else if(j == 1) {
-                                model.setValueAt("",i,j);
-                            }else if(j == 2){
-                                model.setValueAt("",i,j);
-                            }else if(j == 3){
-                                model.setValueAt("",i,j);
-                            }else if(j == 4){
-                                model.setValueAt("",i,j);
-                            }else if(j == 5){
-                                model.setValueAt("",i,j);
-                            }else{
-                                model.setValueAt("",i,j);
+                                    model.setValueAt(jsonArray.getJSONObject(i).getString("id"), i, j);
+                                } else if (j == 2) {
+                                    data[i][j] = jsonArray.getJSONObject(i).getString("timestamp");
+                                    model.setValueAt(jsonArray.getJSONObject(i).getString("timestamp"), i, j);
+                                } else if (j == 3) {
+                                    data[i][j] = jsonArray.getJSONObject(i).getString("level");
+                                    model.setValueAt(jsonArray.getJSONObject(i).getString("level"), i, j);
+                                } else if (j == 4) {
+                                    data[i][j] = jsonArray.getJSONObject(i).getString("logger");
+                                    model.setValueAt(jsonArray.getJSONObject(i).getString("logger"), i, j);
+                                } else if (j == 5) {
+                                    data[i][j] = jsonArray.getJSONObject(i).getString("thread");
+                                    model.setValueAt(jsonArray.getJSONObject(i).getString("thread"), i, j);
+                                } else if (j == 6) {
+                                    data[i][j] = jsonArray.getJSONObject(i).getString("message");
+                                    model.setValueAt(jsonArray.getJSONObject(i).getString("message"), i, j);
+                                }
                             }
                         }
-                    }
+                        for (int i = numlogs; i < 50; i++) {
+                            for (int j = 0; j < 7; j++) {
+                                if (j == 0) {
+                                    model.setValueAt("", i, j);
+                                } else if (j == 1) {
+                                    model.setValueAt("", i, j);
+                                } else if (j == 2) {
+                                    model.setValueAt("", i, j);
+                                } else if (j == 3) {
+                                    model.setValueAt("", i, j);
+                                } else if (j == 4) {
+                                    model.setValueAt("", i, j);
+                                } else if (j == 5) {
+                                    model.setValueAt("", i, j);
+                                } else {
+                                    model.setValueAt("", i, j);
+                                }
+                            }
+                        }
 //                    String[] columnNames = {"id","time", "level", "logger", "thread", "message"};
-                    tb.setModel(model);
-                    tb.tableChanged(new TableModelEvent(tb.getModel()));
-                    SwingUtilities.updateComponentTreeUI(scroll);
+                        tb.setModel(model);
+                        tb.tableChanged(new TableModelEvent(tb.getModel()));
+                        SwingUtilities.updateComponentTreeUI(scroll);
 //                    JScrollPane scroll = new JScrollPane(tb);
 //                    scroll.setPreferredSize(new Dimension(300,100));
-                    c.gridwidth = 8;
-                    c.gridy = 1;
-                    c.gridx = 0;
-                    jpanel.add(scroll,c);
-                    jpanel.revalidate();
-                    jpanel.repaint();
-
+                        c.gridwidth = 8;
+                        c.gridy = 1;
+                        c.gridx = 0;
+                        jpanel.add(scroll, c);
+                        jpanel.revalidate();
+                        jpanel.repaint();
+                    }
                 }catch(Exception e1){
                     e1.printStackTrace();
                 }

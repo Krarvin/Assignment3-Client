@@ -11,15 +11,21 @@ public class CreateRandomLogs {
         Resthome4LogsAppender appender = new Resthome4LogsAppender();
         Logger logger = Logger.getLogger("RandomLogs");
         logger.addAppender(appender);
-        for(int i = 0; i < 25; i++){
+        while(true){
+//        for(int i = 0; i < 25; i++){
 //            try {
 //                TimeUnit.SECONDS.wait(1);
 //            }catch(InterruptedException e){
 //                throw new RuntimeException(e);
 //            }
+            try {
+                Thread.sleep(1000);
+            }catch(InterruptedException e){
+                e.printStackTrace();
+            }
             Random rand = new Random();
             int level = rand.nextInt(5) + 1;
-            System.out.println(level);
+//            System.out.println(level);
             switch(level){
                 case 1:
                     logger.log(Level.FATAL, "fatal message");

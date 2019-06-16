@@ -29,25 +29,37 @@ public class Resthome4LogsAppender extends AppenderSkeleton {
         jsonObject.put("thread", loggingEvent.getThreadName());
         jsonObject.put("logger", loggingEvent.getLoggerName());
         jsonObject.put("level", loggingEvent.getLevel().toString());
-        System.out.println(loggingEvent.getLevel().toString());
+//        System.out.println(loggingEvent.getLevel().toString());
         jsonObject.put("errorDetails", "");
         jsonList.add(jsonObject);
-        try{
-            URIBuilder builder = new URIBuilder();
-            builder.setScheme("http").setHost("localhost").setPort(8080).setPath("/resthome4logs/logs");
-            URI postUri = builder.build();
-            HttpPost post = new HttpPost(postUri);
+        System.out.println(jsonList.size());
+        if(jsonList.size() == 10) {
+            try {
+                URIBuilder builder = new URIBuilder();
+                builder.setScheme("http").setHost("localhost").setPort(8080).setPath("/resthome4logs/logs");
+                URI postUri = builder.build();
+                HttpPost post = new HttpPost(postUri);
+                String output = "[";
+                for(int i =0; i<10; i++){
+                    if(i != 9) {
+                        output = output + jsonList.get(i).toString() + ",\n";
+                    }else{
+                        output = output + jsonList.get(i).toString();
+                    }
+                }
+                output = output + "]";
+                StringEntity json = new StringEntity(output);
+                post.addHeader("content-type", "application/json");
+                post.setEntity(json);
 
-            StringEntity json = new StringEntity("["+jsonObject.toString()+"]");
-            post.addHeader("content-type","application/json");
-            post.setEntity(json);
+                HttpClient httpClient = HttpClientBuilder.create().build();
+                HttpResponse response = httpClient.execute(post);
+                System.out.println(response.getStatusLine());
 
-            HttpClient httpClient = HttpClientBuilder.create().build();
-            HttpResponse response = httpClient.execute(post);
-            System.out.println(response.getStatusLine());
-
-        }catch(Exception e){
-            e.printStackTrace();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            jsonList.clear();
         }
     }
 
