@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>LogMonitor.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">client Maven Webapp</a> &gt; <a href="index.source.html" class="el_package">nz.ac.vuw.swen301.assignment3</a> &gt; <span class="el_source">LogMonitor.java</span></div><h1>LogMonitor.java</h1><pre class="source lang-java linenums">package nz.ac.vuw.swen301.assignment3;
+
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.utils.URIBuilder;
+import org.apache.http.impl.client.HttpClientBuilder;
+import org.apache.http.util.EntityUtils;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.json.JSONArray;
+
+import javax.swing.*;
+import javax.swing.border.EmptyBorder;
+import javax.swing.event.TableModelEvent;
+import javax.swing.table.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
+import java.io.BufferedReader;
+import java.io.FileOutputStream;
+import java.io.InputStreamReader;
+import java.net.URI;
+import java.util.EventObject;
+
+public class LogMonitor extends JFrame {
+<span class="nc" id="L28">    public LogMonitor() {</span>
+<span class="nc" id="L29">        final JPanel jpanel = new JPanel(new GridBagLayout());</span>
+<span class="nc" id="L30">        jpanel.setBorder(new EmptyBorder(5, 5, 5, 5));</span>
+<span class="nc" id="L31">        this.setContentPane(jpanel);</span>
+<span class="nc" id="L32">        this.setResizable(false);</span>
+<span class="nc" id="L33">        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);</span>
+<span class="nc" id="L34">        setBounds(100, 100, 700, 250);</span>
+<span class="nc" id="L35">        final GridBagConstraints c = new GridBagConstraints();</span>
+<span class="nc" id="L36">        c.anchor = GridBagConstraints.NORTH;</span>
+<span class="nc" id="L37">        c.weighty = 1;</span>
+<span class="nc" id="L38">        c.fill = GridBagConstraints.HORIZONTAL;</span>
+<span class="nc" id="L39">        c.insets = new Insets(10,5,0,2);</span>
+<span class="nc" id="L40">        c.gridx = 0;</span>
+<span class="nc" id="L41">        c.gridy = 0;</span>
+<span class="nc" id="L42">        final JLabel minlevel = new JLabel(&quot;min level:&quot;);</span>
+<span class="nc" id="L43">        jpanel.add(minlevel, c);</span>
+<span class="nc" id="L44">        String[] levels = {&quot;TRACE&quot;, &quot;DEBUG&quot;, &quot;INFO&quot;, &quot;WARN&quot;, &quot;ERROR&quot;, &quot;FATAL&quot;};</span>
+<span class="nc" id="L45">        final JComboBox levelList = new JComboBox(levels);</span>
+<span class="nc" id="L46">        levelList.setBounds(50,50,90,20);</span>
+<span class="nc" id="L47">        c.gridx = 1;</span>
+<span class="nc" id="L48">        c.gridy = 0;</span>
+<span class="nc" id="L49">        jpanel.add(levelList, c);</span>
+<span class="nc" id="L50">        final JLabel limit = new JLabel(&quot;limit:&quot;);</span>
+<span class="nc" id="L51">        c.gridx = 2;</span>
+<span class="nc" id="L52">        c.gridy = 0;</span>
+<span class="nc" id="L53">        jpanel.add(limit,c);</span>
+/*        String[] limits = new String[50];
+        for(int i =1; i&lt;=50; i++){
+            limits[i] = i + &quot;&quot;;
+        }
+        final JComboBox limitList = new JComboBox(limits);*/
+//        limitList.setBounds(50,50,90,20);
+<span class="nc" id="L60">        final JTextField limitfield = new JTextField(&quot;enter 1-50&quot;);</span>
+<span class="nc" id="L61">        limitfield.setPreferredSize(new Dimension(100,25));</span>
+<span class="nc" id="L62">        limitfield.addFocusListener(new FocusListener() {</span>
+            public void focusGained(FocusEvent e) {
+<span class="nc" id="L64">                limitfield.setText(&quot;&quot;);</span>
+<span class="nc" id="L65">            }</span>
+
+            public void focusLost(FocusEvent e) {
+                // nothing
+<span class="nc" id="L69">            }</span>
+        });
+<span class="nc" id="L71">        c.gridx = 3;</span>
+<span class="nc" id="L72">        c.gridy = 0;</span>
+<span class="nc" id="L73">        jpanel.add(limitfield, c);</span>
+<span class="nc" id="L74">        final JButton fetchButton = new JButton(&quot;FETCH DATA&quot;);</span>
+
+<span class="nc" id="L76">        c.gridx = 4;</span>
+<span class="nc" id="L77">        c.gridy = 0;</span>
+<span class="nc" id="L78">        jpanel.add(fetchButton, c);</span>
+<span class="nc" id="L79">        final JButton downloadButton = new JButton(&quot;DOWNLOAD STATS&quot;);</span>
+<span class="nc" id="L80">        c.gridx = 5;</span>
+<span class="nc" id="L81">        c.gridy = 0;</span>
+
+<span class="nc" id="L83">        downloadButton.addActionListener(new ActionListener() {</span>
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+<span class="nc" id="L87">                    URIBuilder builder = new URIBuilder();</span>
+<span class="nc" id="L88">                    builder.setScheme(&quot;http&quot;).setHost(&quot;localhost&quot;).setPort(8080).setPath(&quot;/resthome4logs/stats&quot;);</span>
+<span class="nc" id="L89">                    URI getUri = builder.build();</span>
+<span class="nc" id="L90">                    HttpGet get = new HttpGet(getUri);</span>
+<span class="nc" id="L91">                    HttpClient httpClient = HttpClientBuilder.create().build();</span>
+<span class="nc" id="L92">                    HttpResponse response1 = httpClient.execute(get);</span>
+<span class="nc" id="L93">                    System.out.println(response1.getEntity().getContent());</span>
+<span class="nc" id="L94">                    XSSFWorkbook workbook = new XSSFWorkbook(response1.getEntity().getContent());</span>
+<span class="nc" id="L95">                    FileOutputStream fileOut = new FileOutputStream(&quot;log-statistics.xlsx&quot;);</span>
+<span class="nc" id="L96">                    workbook.write(fileOut);</span>
+<span class="nc" id="L97">                    fileOut.close();</span>
+<span class="nc" id="L98">                    JOptionPane.showInternalMessageDialog(jpanel, &quot;Excel stats created&quot;);</span>
+<span class="nc" id="L99">                }catch(Exception e2){</span>
+<span class="nc" id="L100">                    e2.printStackTrace();</span>
+<span class="nc" id="L101">                }</span>
+<span class="nc" id="L102">            }</span>
+        }
+
+        );
+<span class="nc" id="L106">        jpanel.add(downloadButton, c);</span>
+<span class="nc" id="L107">        String[] cols = {&quot;&quot;,&quot;id&quot;,&quot;time&quot;, &quot;level&quot;, &quot;logger&quot;, &quot;thread&quot;, &quot;message&quot;};</span>
+<span class="nc" id="L108">        String[][] rows = new String[50][7];</span>
+<span class="nc" id="L109">        final JTable tb = new JTable(rows, cols);</span>
+<span class="nc" id="L110">        tb.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);</span>
+<span class="nc" id="L111">        tb.setBounds(30,40,200,200);</span>
+<span class="nc" id="L112">        c.gridx = 0;</span>
+<span class="nc" id="L113">        c.gridy = 1;</span>
+<span class="nc" id="L114">        c.gridwidth = 8;</span>
+<span class="nc" id="L115">        final JScrollPane scroll = new JScrollPane(tb);</span>
+<span class="nc" id="L116">        scroll.setPreferredSize(new Dimension(300,100));</span>
+<span class="nc" id="L117">        jpanel.add(scroll,c);</span>
+
+<span class="nc" id="L119">        fetchButton.addActionListener(new ActionListener() {</span>
+            @Override
+            public void actionPerformed(ActionEvent e) {
+<span class="nc" id="L122">                String num = limitfield.getText();</span>
+<span class="nc" id="L123">                String level = levelList.getSelectedItem().toString();</span>
+
+                try {
+<span class="nc" id="L126">                    URIBuilder builder = new URIBuilder();</span>
+<span class="nc" id="L127">                    builder.setScheme(&quot;http&quot;).setHost(&quot;localhost&quot;).setPort(8080).setPath(&quot;/resthome4logs/logs&quot;).setParameter(&quot;limit&quot;, num).setParameter(&quot;level&quot;,level);</span>
+<span class="nc" id="L128">                    URI getUri = builder.build();</span>
+<span class="nc" id="L129">                    HttpGet get = new HttpGet(getUri);</span>
+<span class="nc" id="L130">                    HttpClient httpClient = HttpClientBuilder.create().build();</span>
+<span class="nc" id="L131">                    HttpResponse response = httpClient.execute(get);</span>
+<span class="nc" id="L132">                    String jsonString = EntityUtils.toString(response.getEntity());</span>
+<span class="nc" id="L133">                    int numlogs = Integer.parseInt(num);</span>
+<span class="nc bnc" id="L134" title="All 4 branches missed.">                    if(numlogs &lt;= 50 &amp;&amp; numlogs &gt;0) {</span>
+<span class="nc" id="L135">                    JSONArray jsonArray = new JSONArray(jsonString);</span>
+<span class="nc" id="L136">                        String[][] data = new String[numlogs][7];</span>
+<span class="nc" id="L137">                        TableModel model = tb.getModel();</span>
+<span class="nc bnc" id="L138" title="All 4 branches missed.">                        for (int i = 0; i &lt; numlogs &amp;&amp; i &lt; jsonArray.length(); i++) {</span>
+<span class="nc bnc" id="L139" title="All 2 branches missed.">                            for (int j = 0; j &lt; 7; j++) {</span>
+<span class="nc bnc" id="L140" title="All 2 branches missed.">                                if (j == 0) {</span>
+//                                data[i][j] = jsonArray.getJSONObject(i).getString(&quot;id&quot;);
+//                                model.setValueAt(jsonArray.getJSONObject(i).getString(&quot;id&quot;),i,j);
+<span class="nc" id="L143">                                    model.setValueAt(Integer.toString(i + 1), i, j);</span>
+                                }
+<span class="nc bnc" id="L145" title="All 2 branches missed.">                                if (j == 1) {</span>
+//                                data[i][j] = jsonArray.getJSONObject(i).getString(&quot;id&quot;);
+<span class="nc" id="L147">                                    model.setValueAt(jsonArray.getJSONObject(i).getString(&quot;id&quot;), i, j);</span>
+<span class="nc bnc" id="L148" title="All 2 branches missed.">                                } else if (j == 2) {</span>
+<span class="nc" id="L149">                                    data[i][j] = jsonArray.getJSONObject(i).getString(&quot;timestamp&quot;);</span>
+<span class="nc" id="L150">                                    model.setValueAt(jsonArray.getJSONObject(i).getString(&quot;timestamp&quot;), i, j);</span>
+<span class="nc bnc" id="L151" title="All 2 branches missed.">                                } else if (j == 3) {</span>
+<span class="nc" id="L152">                                    data[i][j] = jsonArray.getJSONObject(i).getString(&quot;level&quot;);</span>
+<span class="nc" id="L153">                                    model.setValueAt(jsonArray.getJSONObject(i).getString(&quot;level&quot;), i, j);</span>
+<span class="nc bnc" id="L154" title="All 2 branches missed.">                                } else if (j == 4) {</span>
+<span class="nc" id="L155">                                    data[i][j] = jsonArray.getJSONObject(i).getString(&quot;logger&quot;);</span>
+<span class="nc" id="L156">                                    model.setValueAt(jsonArray.getJSONObject(i).getString(&quot;logger&quot;), i, j);</span>
+<span class="nc bnc" id="L157" title="All 2 branches missed.">                                } else if (j == 5) {</span>
+<span class="nc" id="L158">                                    data[i][j] = jsonArray.getJSONObject(i).getString(&quot;thread&quot;);</span>
+<span class="nc" id="L159">                                    model.setValueAt(jsonArray.getJSONObject(i).getString(&quot;thread&quot;), i, j);</span>
+<span class="nc bnc" id="L160" title="All 2 branches missed.">                                } else if (j == 6) {</span>
+<span class="nc" id="L161">                                    data[i][j] = jsonArray.getJSONObject(i).getString(&quot;message&quot;);</span>
+<span class="nc" id="L162">                                    model.setValueAt(jsonArray.getJSONObject(i).getString(&quot;message&quot;), i, j);</span>
+                                }
+                            }
+                        }
+<span class="nc bnc" id="L166" title="All 2 branches missed.">                        for (int i = numlogs; i &lt; 50; i++) {</span>
+<span class="nc bnc" id="L167" title="All 2 branches missed.">                            for (int j = 0; j &lt; 7; j++) {</span>
+<span class="nc bnc" id="L168" title="All 2 branches missed.">                                if (j == 0) {</span>
+<span class="nc" id="L169">                                    model.setValueAt(&quot;&quot;, i, j);</span>
+<span class="nc bnc" id="L170" title="All 2 branches missed.">                                } else if (j == 1) {</span>
+<span class="nc" id="L171">                                    model.setValueAt(&quot;&quot;, i, j);</span>
+<span class="nc bnc" id="L172" title="All 2 branches missed.">                                } else if (j == 2) {</span>
+<span class="nc" id="L173">                                    model.setValueAt(&quot;&quot;, i, j);</span>
+<span class="nc bnc" id="L174" title="All 2 branches missed.">                                } else if (j == 3) {</span>
+<span class="nc" id="L175">                                    model.setValueAt(&quot;&quot;, i, j);</span>
+<span class="nc bnc" id="L176" title="All 2 branches missed.">                                } else if (j == 4) {</span>
+<span class="nc" id="L177">                                    model.setValueAt(&quot;&quot;, i, j);</span>
+<span class="nc bnc" id="L178" title="All 2 branches missed.">                                } else if (j == 5) {</span>
+<span class="nc" id="L179">                                    model.setValueAt(&quot;&quot;, i, j);</span>
+                                } else {
+<span class="nc" id="L181">                                    model.setValueAt(&quot;&quot;, i, j);</span>
+                                }
+                            }
+                        }
+//                    String[] columnNames = {&quot;id&quot;,&quot;time&quot;, &quot;level&quot;, &quot;logger&quot;, &quot;thread&quot;, &quot;message&quot;};
+<span class="nc" id="L186">                        tb.setModel(model);</span>
+<span class="nc" id="L187">                        tb.tableChanged(new TableModelEvent(tb.getModel()));</span>
+<span class="nc" id="L188">                        SwingUtilities.updateComponentTreeUI(scroll);</span>
+//                    JScrollPane scroll = new JScrollPane(tb);
+//                    scroll.setPreferredSize(new Dimension(300,100));
+<span class="nc" id="L191">                        c.gridwidth = 8;</span>
+<span class="nc" id="L192">                        c.gridy = 1;</span>
+<span class="nc" id="L193">                        c.gridx = 0;</span>
+<span class="nc" id="L194">                        jpanel.add(scroll, c);</span>
+<span class="nc" id="L195">                        jpanel.revalidate();</span>
+<span class="nc" id="L196">                        jpanel.repaint();</span>
+                    }
+<span class="nc" id="L198">                }catch(Exception e1){</span>
+<span class="nc" id="L199">                    e1.printStackTrace();</span>
+<span class="nc" id="L200">                }</span>
+
+<span class="nc" id="L202">            }</span>
+        });
+<span class="nc" id="L204">    }</span>
+    public static void main(String args[]){
+<span class="nc" id="L206">        LogMonitor Gui = new LogMonitor();</span>
+<span class="nc" id="L207">        Gui.setTitle(&quot;Log Monitor&quot;);</span>
+<span class="nc" id="L208">        Gui.setVisible(true);</span>
+<span class="nc" id="L209">    }</span>
+}
+
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

@@ -2,14 +2,18 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6172729f-5e23-42ff-84c3-ede27e672b16" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/test.nz.ac.vuw.swen301.assignment3/Resthome4LogsAppenderTests.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/log-statistics.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/log-statistics.xlsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/nz/ac/vuw/swen301/assignment3/LogMonitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nz/ac/vuw/swen301/assignment3/LogMonitor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/nz/ac/vuw/swen301/assignment3/Resthome4LogsAppender.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nz/ac/vuw/swen301/assignment3/Resthome4LogsAppender.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/test.nz.ac.vuw.swen301.assignment3/Resthome4LogsAppenderTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/test.nz.ac.vuw.swen301.assignment3/Resthome4LogsAppenderTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/META-INF/assignment3-client.kotlin_module" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/nz/ac/vuw/swen301/assignment3/CreateRandomLogs.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/nz/ac/vuw/swen301/assignment3/CreateRandomLogs.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/nz/ac/vuw/swen301/assignment3/LogMonitor$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/nz/ac/vuw/swen301/assignment3/LogMonitor$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/nz/ac/vuw/swen301/assignment3/LogMonitor$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/nz/ac/vuw/swen301/assignment3/LogMonitor$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/nz/ac/vuw/swen301/assignment3/LogMonitor$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/nz/ac/vuw/swen301/assignment3/LogMonitor$3.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/nz/ac/vuw/swen301/assignment3/LogMonitor.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/nz/ac/vuw/swen301/assignment3/LogMonitor.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/nz/ac/vuw/swen301/assignment3/Resthome4LogsAppender.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/nz/ac/vuw/swen301/assignment3/Resthome4LogsAppender.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/test/nz/ac/vuw/swen301/Resthome4LogsAppenderTests.class" beforeDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -24,11 +28,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/pom.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="204">
-              <caret line="18" column="30" selection-start-line="18" selection-start-column="30" selection-end-line="18" selection-end-column="30" />
+            <state relative-caret-position="133">
+              <caret line="114" column="17" selection-start-line="114" selection-start-column="17" selection-end-line="114" selection-end-column="17" />
             </state>
           </provider>
         </entry>
@@ -36,8 +40,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/test/java/test.nz.ac.vuw.swen301.assignment3/Resthome4LogsAppenderTests.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="306">
-              <caret line="104" selection-start-line="104" selection-end-line="104" />
+            <state relative-caret-position="-2805">
+              <caret line="32" column="47" selection-start-line="32" selection-start-column="47" selection-end-line="32" selection-end-column="47" />
             </state>
           </provider>
         </entry>
@@ -45,7 +49,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/nz/ac/vuw/swen301/assignment3/Resthome4LogsAppender.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="340">
+            <state relative-caret-position="85">
               <caret line="20" column="18" selection-start-line="20" selection-start-column="18" selection-end-line="20" selection-end-column="18" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -54,11 +58,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/nz/ac/vuw/swen301/assignment3/LogMonitor.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="17">
-              <caret line="1" selection-start-line="1" selection-end-line="1" />
+            <state relative-caret-position="1190">
+              <caret line="94" column="20" selection-start-line="94" selection-start-column="20" selection-end-line="95" selection-end-column="44" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -69,7 +73,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/nz/ac/vuw/swen301/assignment3/CreateRandomLogs.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="782">
+            <state relative-caret-position="714">
               <caret line="46" column="13" selection-start-line="46" selection-start-column="13" selection-end-line="46" selection-end-column="13" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -120,8 +124,9 @@
         <option value="$PROJECT_DIR$/src/test/java/test/nz/ac/vuw/swen301/Resthome4LogsAppender.java" />
         <option value="$PROJECT_DIR$/src/test/java/test/nz/ac/vuw/swen301/Resthome4LogsAppenderTests.java" />
         <option value="$PROJECT_DIR$/src/main/java/nz/ac/vuw/swen301/assignment3/Resthome4LogsAppender.java" />
-        <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/src/main/java/nz/ac/vuw/swen301/assignment3/LogMonitor.java" />
+        <option value="$PROJECT_DIR$/src/test/java/test.nz.ac.vuw.swen301.assignment3/Resthome4LogsAppenderTests.java" />
+        <option value="$PROJECT_DIR$/pom.xml" />
       </list>
     </option>
   </component>
@@ -154,8 +159,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -217,10 +220,17 @@
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="test.nz.ac.vuw.swen301.assignment3" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="assignment3-client" type="b2602c69:ProjectViewProjectNode" />
+              <item name="assignment3-client" type="462c0819:PsiDirectoryNode" />
+              <item name="target" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -234,6 +244,11 @@
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
   </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/test/java/test.nz.ac.vuw.swen301.assignment3" />
+    </key>
+  </component>
   <component name="RunDashboard">
     <option name="ruleStates">
       <list>
@@ -246,7 +261,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.Resthome4LogsAppenderTests">
+  <component name="RunManager" selected="JUnit.Resthome4LogsAppenderTests (1)">
     <configuration name="CreateRandomLogs" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="nz.ac.vuw.swen301.assignment3.CreateRandomLogs" />
       <module name="assignment3-client" />
@@ -273,6 +288,21 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="Resthome4LogsAppenderTests (1)" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="assignment3-client" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="test.nz.ac.vuw.swen301.assignment3.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="test.nz.ac.vuw.swen301.assignment3" />
+      <option name="MAIN_CLASS_NAME" value="test.nz.ac.vuw.swen301.assignment3.Resthome4LogsAppenderTests" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="Resthome4LogsAppenderTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="assignment3-client" />
       <extension name="coverage">
@@ -290,9 +320,10 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.Resthome4LogsAppenderTests" />
+        <item itemvalue="JUnit.Resthome4LogsAppenderTests (1)" />
         <item itemvalue="Application.LogMonitor" />
         <item itemvalue="Application.CreateRandomLogs" />
+        <item itemvalue="JUnit.Resthome4LogsAppenderTests" />
       </list>
     </recent_temporary>
   </component>
@@ -326,19 +357,30 @@
       <workItem from="1560656762394" duration="36000" />
       <workItem from="1560657375463" duration="11686000" />
       <workItem from="1560709132153" duration="930000" />
-      <workItem from="1560710269863" duration="265000" />
+      <workItem from="1560710269863" duration="2020000" />
+      <workItem from="1560712757410" duration="1195000" />
     </task>
     <servers />
   </component>
+  <component name="TestHistory">
+    <history-entry file="Resthome4LogsAppenderTests - 2019.06.17 at 06h 42m 17s.xml">
+      <configuration name="Resthome4LogsAppenderTests" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="Resthome4LogsAppenderTests - 2019.06.17 at 06h 42m 33s.xml">
+      <configuration name="Resthome4LogsAppenderTests" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="Resthome4LogsAppenderTests_(1) - 2019.06.17 at 07h 34m 36s.xml">
+      <configuration name="Resthome4LogsAppenderTests (1)" configurationId="JUnit" />
+    </history-entry>
+  </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="92698000" />
+    <option name="totallyTimeSpent" value="95648000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1920" height="1044" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.4813008" visible="true" weight="0.22145145" />
-      <window_info id="Structure" order="1" sideWeight="0.51869917" side_tool="true" visible="true" weight="0.22145145" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.47980613" visible="true" weight="0.22411953" />
+      <window_info id="Structure" order="1" sideWeight="0.5201939" side_tool="true" visible="true" weight="0.22411953" />
       <window_info id="Designer" order="2" />
       <window_info id="Image Layers" order="3" />
       <window_info id="Capture Tool" order="4" />
@@ -352,13 +394,13 @@
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Terminal" order="7" weight="0.3242358" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="7" visible="true" weight="0.3242358" />
       <window_info anchor="bottom" id="Docker" order="8" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
       <window_info anchor="bottom" id="Java Enterprise" order="10" weight="0.32983193" />
       <window_info anchor="bottom" id="Database Changes" order="11" />
       <window_info anchor="bottom" id="Version Control" order="12" />
-      <window_info anchor="bottom" id="Messages" order="13" visible="true" weight="0.3286026" />
+      <window_info anchor="bottom" id="Messages" order="13" weight="0.3286026" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -416,8 +458,18 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/nz/ac/vuw/swen301/assignment3/Resthome4LogsAppender.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
+        <state relative-caret-position="85">
           <caret line="20" column="18" selection-start-line="20" selection-start-column="18" selection-end-line="20" selection-end-column="18" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/nz/ac/vuw/swen301/assignment3/LogMonitor.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1190">
+          <caret line="94" column="20" selection-start-line="94" selection-start-column="20" selection-end-line="95" selection-end-column="44" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -426,7 +478,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/nz/ac/vuw/swen301/assignment3/CreateRandomLogs.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="782">
+        <state relative-caret-position="714">
           <caret line="46" column="13" selection-start-line="46" selection-start-column="13" selection-end-line="46" selection-end-column="13" />
           <folding>
             <element signature="imports" expanded="true" />
@@ -444,27 +496,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="18" column="30" selection-start-line="18" selection-start-column="30" selection-end-line="18" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/test.nz.ac.vuw.swen301.assignment3/Resthome4LogsAppenderTests.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="104" selection-start-line="104" selection-end-line="104" />
+        <state relative-caret-position="-2805">
+          <caret line="32" column="47" selection-start-line="32" selection-start-column="47" selection-end-line="32" selection-end-column="47" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/nz/ac/vuw/swen301/assignment3/LogMonitor.java">
+    <entry file="file://$PROJECT_DIR$/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="1" selection-start-line="1" selection-end-line="1" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state relative-caret-position="133">
+          <caret line="114" column="17" selection-start-line="114" selection-start-column="17" selection-end-line="114" selection-end-column="17" />
         </state>
       </provider>
     </entry>
@@ -479,7 +521,6 @@
             <option name="proportions">
               <list>
                 <option value="0.2" />
-                <option value="0.5" />
               </list>
             </option>
           </splitter-proportions>
@@ -526,7 +567,6 @@
             <option name="proportions">
               <list>
                 <option value="0.2" />
-                <option value="0.6" />
               </list>
             </option>
           </splitter-proportions>

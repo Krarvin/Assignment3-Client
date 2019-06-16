@@ -1,0 +1,7 @@
+GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
+client Maven Webapp,nz.ac.vuw.swen301.assignment3,LogMonitor,298,0,0,0,58,0,2,0,2,0
+client Maven Webapp,nz.ac.vuw.swen301.assignment3,Resthome4LogsAppender,6,170,0,6,4,32,2,6,2,3
+client Maven Webapp,nz.ac.vuw.swen301.assignment3,CreateRandomLogs,61,0,7,0,23,0,8,0,2,0
+client Maven Webapp,nz.ac.vuw.swen301.assignment3,LogMonitor.new ActionListener() {...},69,0,0,0,17,0,2,0,2,0
+client Maven Webapp,nz.ac.vuw.swen301.assignment3,LogMonitor.new ActionListener() {...},366,0,40,0,64,0,22,0,2,0
+client Maven Webapp,nz.ac.vuw.swen301.assignment3,LogMonitor.new FocusListener() {...},15,0,0,0,4,0,3,0,3,0

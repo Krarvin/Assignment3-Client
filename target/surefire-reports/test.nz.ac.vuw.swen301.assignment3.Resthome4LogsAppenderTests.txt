@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: test.nz.ac.vuw.swen301.assignment3.Resthome4LogsAppenderTests
+-------------------------------------------------------------------------------
+Tests run: 8, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.797 s - in test.nz.ac.vuw.swen301.assignment3.Resthome4LogsAppenderTests

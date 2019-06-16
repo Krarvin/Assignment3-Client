@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Resthome4LogsAppender.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">client Maven Webapp</a> &gt; <a href="index.source.html" class="el_package">nz.ac.vuw.swen301.assignment3</a> &gt; <span class="el_source">Resthome4LogsAppender.java</span></div><h1>Resthome4LogsAppender.java</h1><pre class="source lang-java linenums">package nz.ac.vuw.swen301.assignment3;
+
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.client.utils.URIBuilder;
+import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.client.HttpClientBuilder;
+import org.apache.log4j.AppenderSkeleton;
+import org.apache.log4j.spi.LoggingEvent;
+
+import java.net.URI;
+import org.json.JSONObject;
+
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.UUID;
+
+<span class="fc" id="L20">public class Resthome4LogsAppender extends AppenderSkeleton {</span>
+<span class="fc" id="L21">    public static ArrayList&lt;JSONObject&gt; jsonList = new ArrayList&lt;&gt;();</span>
+    @Override
+    protected void append(LoggingEvent loggingEvent) {
+
+<span class="fc" id="L25">        JSONObject jsonObject = new JSONObject();</span>
+<span class="fc" id="L26">        jsonObject.put(&quot;id&quot;, UUID.randomUUID());</span>
+<span class="fc" id="L27">        jsonObject.put(&quot;message&quot;, loggingEvent.getMessage());</span>
+<span class="fc" id="L28">        jsonObject.put(&quot;timestamp&quot;, new SimpleDateFormat(&quot;yyyy-MM-dd'T'HH:mm:ss.SSS'Z'&quot;).format(loggingEvent.getTimeStamp()));</span>
+<span class="fc" id="L29">        jsonObject.put(&quot;thread&quot;, loggingEvent.getThreadName());</span>
+<span class="fc" id="L30">        jsonObject.put(&quot;logger&quot;, loggingEvent.getLoggerName());</span>
+<span class="fc" id="L31">        jsonObject.put(&quot;level&quot;, loggingEvent.getLevel().toString());</span>
+//        System.out.println(loggingEvent.getLevel().toString());
+<span class="fc" id="L33">        jsonObject.put(&quot;errorDetails&quot;, &quot;&quot;);</span>
+<span class="fc" id="L34">        jsonList.add(jsonObject);</span>
+<span class="fc" id="L35">        System.out.println(jsonList.size());</span>
+<span class="fc bfc" id="L36" title="All 2 branches covered.">        if(jsonList.size() == 10) {</span>
+            try {
+<span class="fc" id="L38">                URIBuilder builder = new URIBuilder();</span>
+<span class="fc" id="L39">                builder.setScheme(&quot;http&quot;).setHost(&quot;localhost&quot;).setPort(8080).setPath(&quot;/resthome4logs/logs&quot;);</span>
+<span class="fc" id="L40">                URI postUri = builder.build();</span>
+<span class="fc" id="L41">                HttpPost post = new HttpPost(postUri);</span>
+<span class="fc" id="L42">                String output = &quot;[&quot;;</span>
+<span class="fc bfc" id="L43" title="All 2 branches covered.">                for(int i =0; i&lt;10; i++){</span>
+<span class="fc bfc" id="L44" title="All 2 branches covered.">                    if(i != 9) {</span>
+<span class="fc" id="L45">                        output = output + jsonList.get(i).toString() + &quot;,\n&quot;;</span>
+                    }else{
+<span class="fc" id="L47">                        output = output + jsonList.get(i).toString();</span>
+                    }
+                }
+<span class="fc" id="L50">                output = output + &quot;]&quot;;</span>
+<span class="fc" id="L51">                StringEntity json = new StringEntity(output);</span>
+<span class="fc" id="L52">                post.addHeader(&quot;content-type&quot;, &quot;application/json&quot;);</span>
+<span class="fc" id="L53">                post.setEntity(json);</span>
+
+<span class="fc" id="L55">                HttpClient httpClient = HttpClientBuilder.create().build();</span>
+<span class="fc" id="L56">                HttpResponse response = httpClient.execute(post);</span>
+<span class="fc" id="L57">                System.out.println(response.getStatusLine());</span>
+
+<span class="nc" id="L59">            } catch (Exception e) {</span>
+<span class="nc" id="L60">                e.printStackTrace();</span>
+<span class="fc" id="L61">            }</span>
+<span class="fc" id="L62">            jsonList.clear();</span>
+        }
+<span class="fc" id="L64">    }</span>
+
+
+    @Override
+    public void close() {
+
+<span class="nc" id="L70">    }</span>
+
+    @Override
+    public boolean requiresLayout() {
+<span class="nc" id="L74">        return false;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

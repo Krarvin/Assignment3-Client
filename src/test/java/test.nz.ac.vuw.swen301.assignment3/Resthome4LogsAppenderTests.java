@@ -1,4 +1,4 @@
-package test.nz.ac.vuw.swen301;
+package test.nz.ac.vuw.swen301.assignment3;
 
 import org.apache.http.client.methods.HttpGet;
 import nz.ac.vuw.swen301.assignment3.Resthome4LogsAppender;
